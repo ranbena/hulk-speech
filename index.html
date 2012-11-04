@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Voice anim demo</title>
+	<style>
+		#hulk {
+			background: url("hulk.jpg") 0 -400px;
+			width: 308px;
+			height: 400px;
+		}
+		.openMouth {
+			background-position: 0 0 !important;
+		}
+    </style>
+</head>
+<body>
+	<audio id="audio" src="hulk.mp3" preload controls></audio>
+	
+	<div id="hulk"></div>
+
+	<script>
+		var el = document.getElementById('hulk');
+		var audioElement = document.getElementById('audio'); // The audio element
+		audioElement.addEventListener('play', draw); // when the audio starts playing
+
+		var audioContext = new webkitAudioContext() // Create new Audio Context
+		var analyser = audioContext.createAnalyser(); // and an audio analyzer
+		var source;
+
+		window.onload = function() {
+	  		source = audioContext.createMediaElementSource(audioElement); // Take input from audioElement
+
+			source.connect(analyser); // connect to analyser
+			analyser.connect(audioContext.destination); // connect to speakers
+		}
+
+		function draw() {
+			window.webkitRequestAnimationFrame(draw);
+
+			// get frequency data
+			var freqData = new Uint8Array(analyser.frequencyBinCount);
+		  	analyser.getByteFrequencyData(freqData);
+
+		  	var volume = freqData[200];
+		  	console.log(volume);
+
+		  	// update classname
+		  	el.className = volume > 30 ? "openMouth" : "";
+		}
+	</script>
+</body>
+</html
