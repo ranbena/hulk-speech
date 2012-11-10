@@ -4,17 +4,17 @@
 	<title>Voice anim demo</title>
 	<style>
 		#hulk {
-			background: url("hulk.jpg") 0 -400px;
+			background: url("img/hulk.jpg") 0 -400px;
 			width: 308px;
 			height: 400px;
 		}
 		.openMouth {
 			background-position: 0 0 !important;
 		}
-    </style>§
+    </style>
 </head>
 <body>
-	<audio id="audio" src="britney.mp3" preload controls></audio>
+	<audio id="audio" src="audio/hulk.mp3" preload controls></audio>
 	
 	<div id="hulk"></div>
 
@@ -45,7 +45,7 @@
 		  	var volume = freqData[200];
 
 		  	// update classname
-		  	el.className = volume > 100 ? "openMouth" : "";
+		  	el.className = volume > 30 ? "openMouth" : "";
 		}
 	</script>
 </body>
